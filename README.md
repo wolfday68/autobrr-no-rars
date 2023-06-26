@@ -7,7 +7,7 @@ If you don't like getting stuff from autobrr that has `.rar` files, you're in lu
 To ensure that no releases are passed to an action if they contain a `.rar` file, go to the "External" tab of your filter(s). Fill out the following information in the "Script" section of the page:
 
 1. Command: `/app/check-rar.sh`
-2. Arguments: `{{.TorrentPathName}} {{.FilterName}} {{.TorrentName}}`
+2. Arguments: `"{{.TorrentPathName}}" "{{.FilterName}}" "{{.TorrentName}}"`
 3. Expected exit status: `0`
 
 Then hit save. Here's how it should look:
