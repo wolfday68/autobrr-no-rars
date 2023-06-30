@@ -7,12 +7,15 @@ If you don't like getting stuff from autobrr that has `.rar` files, you're in lu
 To ensure that no releases are passed to an action if they contain a `.rar` file, go to the "External" tab of your filter(s). Fill out the following information in the "Script" section of the page:
 
 1. Command: `/app/check-rar.sh`
-2. Arguments: `"{{.TorrentPathName}}"`
+2. Arguments: `"{{.TorrentPathName}}" 0`
 3. Expected exit status: `0`
 
 Then hit save. Here's how it should look:
 
 ![Example of filter page](image.png)
+
+### Allow some `.rar` files
+If for some reason you want to permit a certain number of rar files, such as if you expect the subtitles or a sample is rar'd but not the content, then you can set a threshold for how many `.rar` files you are willing to tolerate for a release. To do this, simply change the second argument provided from a `0` to whatever number you like. If you want to block a release with two `.rar` files but not one, then you would put `1` since that is the maximum number of `.rar` files you will accept.
 
 ## Explanation
 
