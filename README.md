@@ -21,22 +21,4 @@ I got tired of autobrr downloading stuff that has `.rar` files. You have to eith
 All my homies hate rar'd releases.
 
 ## How it works
-This container does two things: downloads a binary of [intermodal](https://github.com/casey/intermodal), which lets us view metadata about torrent files, and it also copies in the validator script. The script uses that `intermodal` binary to dump some JSON metadata about the torrent file that we're evaluating. The script scans the "files" array of that metadata JSON for anything ending in `.rar`. It exits silently if none are found but spits out a log if it does find anything.
-
-## Logging
-We pass the `{{.FilterName}}` and the `{{.TorrentName}}` variables as arguments to help identify which release was blocked and what filter it came from. An example log output might be:
-```
-{
-  "level": "debug",
-  "module": "filter-rar-script",
-  "time": "2023-06-25T19:10:04-02:00",
-  "message": "Found rars in a release, ignoring it.",
-  "filter": "<my filter name>",
-  "torrentName": "<some.torrent.release>",
-  "rarFiles": [
-    "<file1.rar>",
-    "<file2.rar>",
-    "<file3.rar>"
-  ]
-}
-```
+This container does two things: downloads a binary of [intermodal](https://github.com/casey/intermodal), which lets us view metadata about torrent files, and it also copies in the validator script. The script uses that `intermodal` binary to dump some JSON metadata about the torrent file that we're evaluating. The script scans the "files" array of that metadata JSON for anything ending in `.rar`. The script exits silently if none are found but exits with an error if it does find anything, which autobrr will notice and ignore the release.
